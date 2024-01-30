@@ -3,3 +3,13 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap');
+
+.slick-dots .slick-active div{
+    border-right: 3px solid #222 !important;
+}
+@media (max-width: 640px) { 
+    .slick-dots{
+        left: 10px !important;
+    }
+ }
+

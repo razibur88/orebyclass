@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Container from './Container'
 import Flex from './Flex'
+import { RxCross2 } from "react-icons/rx";
+import { FaBars } from "react-icons/fa";
 import Logo from "../assets/logo.png"
 
 const Header = () => {
+    let [show, setShow] = useState(false)
+
+    let handleShow = () =>{
+        setShow(!show)
+    }
   return (
     <header className='py-6'>
         <Container>
@@ -12,15 +19,19 @@ const Header = () => {
                 <img src={Logo} alt="logo" />
             </div>
             <div className="">
-                <ul className='flex gap-x-8'>
-                    <li>
+                <ul className={`lg:flex gap-x-8 absolute left-0 top-0 lg:static ${show == true ? "bg-[#F5F5F5] text-center w-full duration-300 ease-in !top-[60px] z-50" : "!top-[-200px] w-full"}`}>
+                    <li className='py-2'>
                         <a href="#" className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222]'>Home</a>
                     </li>
-                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222]'>Shop</li>
-                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222]'>About</li>
-                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222]'>Contacts</li>
-                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222]'>Journal</li>
+                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>Shop</li>
+                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>About</li>
+                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>Contacts</li>
+                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>Journal</li>
                 </ul>
+            </div>
+
+            <div className="lg:hidden" onClick={handleShow}>
+                {show ? <RxCross2 /> : <FaBars/>}
             </div>
         </Flex>
     </Container>
