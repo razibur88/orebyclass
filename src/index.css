@@ -13,3 +13,33 @@
     }
  }
 
+ .next{
+    height: 40px;
+    width: 40px;
+    background-color: #979797;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    line-height: 30px;
+    text-align: center !important;
+    color: #fff;
+    font-size: 24px;
+ }
+ .prve{
+    height: 40px;
+    width: 40px;
+    background-color: #979797;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    line-height: 30px;
+    text-align: center !important;
+    color: #fff;
+    font-size: 24px;
+    z-index: 1
+ }
+

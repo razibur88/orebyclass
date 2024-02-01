@@ -19,7 +19,7 @@ const Header = () => {
                 <img src={Logo} alt="logo" />
             </div>
             <div className="">
-                <ul className={`lg:flex gap-x-8 absolute left-0 top-0 lg:static ${show == true ? "bg-[#F5F5F5] text-center w-full duration-300 ease-in !top-[60px] z-50" : "!top-[-200px] w-full"}`}>
+                <ul className={`lg:flex gap-x-8 absolute left-0 top-0 lg:static ${show == true ? "bg-[#F5F5F5] text-center w-full duration-300 ease-in !top-[50px] z-50" : "!top-[50px] duration-300 ease-in left-[-200px]"}`}>
                     <li className='py-2'>
                         <a href="#" className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222]'>Home</a>
                     </li>
