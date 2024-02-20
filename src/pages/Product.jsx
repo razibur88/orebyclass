@@ -11,6 +11,11 @@ const Product = () => {
     let [currentPage, setCurrentPage] = useState(1)
     let [perPage, setPerPage] = useState(6)
 
+    let pageNumber = []
+    for(let i = 0; i < Math.ceil(data.length / perPage); i++){
+        pageNumber.push(i)
+    }
+
     let lastPage = currentPage * perPage
     let firstPage = lastPage - perPage
     
@@ -18,11 +23,11 @@ const Product = () => {
 
 
     let paginate = (pageNumber)=>{
-        setCurrentPage(pageNumber)
+        setCurrentPage(pageNumber + 1)
     }
 
     let next = () =>{
-       if(currentPage < data.length){
+       if(currentPage < pageNumber.length){
         setCurrentPage((state)=> state + 1)
        }
     }
@@ -44,7 +49,7 @@ const Product = () => {
                     <div className="flex justify-between flex-wrap">
                         <Post post={allPage}/>
                     </div>
-                    <PaginationNum totalPage={data.length} perPage={perPage} paginate={paginate} next={next} prve={prve} currentPage={currentPage}/>
+                    <PaginationNum pageNumber={pageNumber} paginate={paginate} next={next} prve={prve} currentPage={currentPage}/>
                 </div>
             </Flex>
         </Container>

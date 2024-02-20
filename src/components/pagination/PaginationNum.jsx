@@ -1,10 +1,7 @@
 import React from 'react'
 
-const PaginationNum = ({totalPage,perPage,paginate,next,prve,currentPage}) => {
-   let pageNumber = []
-   for(let i = 1; i < Math.ceil(totalPage / perPage); i++){
-    pageNumber.push(i)
-   }
+const PaginationNum = ({pageNumber,paginate,next,prve,currentPage}) => {
+   
   return (
     <>
 <nav aria-label="Page navigation example">
@@ -20,7 +17,7 @@ const PaginationNum = ({totalPage,perPage,paginate,next,prve,currentPage}) => {
 
     {pageNumber.map((item,i)=>(
         <li onClick={()=>paginate(item)} className={currentPage == i + 1 ? "flex items-center justify-center px-3 h-8 leading-tight text-[#fff] bg-gray-800 border border-gray-300" : "flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300"}>
-        <a>{item}</a>
+        <a>{item + 1}</a>
       </li>
     ))}
     

@@ -1,12 +1,14 @@
 import React from 'react'
 import { FaCartPlus,FaHeart } from "react-icons/fa";
 import { IoGitCompare } from "react-icons/io5";
+import {Link} from "react-router-dom"
 
 const Post = ({post}) => {
   return (
     <>
         {post.map((item)=>(
                 <div className='w-[32%]'>
+                    <Link to={`/product/${item.id}`}>
                     <div className="py-3">
                         <div className="relative group">
                             <img src={item.thumbnail} className='h-[300px] w-full' alt="" />
@@ -24,7 +26,9 @@ const Post = ({post}) => {
                                 <h3 className='font-dm font-bold text-[16px]'>{item.title}</h3>
                                 <p>${item.price}</p>
                             </div>
-                            </div>
+                        </div>
+                    </Link>
+                    
                     </div>
                         ))}
     </>
