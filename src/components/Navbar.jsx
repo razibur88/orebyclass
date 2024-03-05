@@ -6,9 +6,11 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { IoSearchSharp } from "react-icons/io5";
 import Cartimg from "../assets/Image.png"
 import { RxCross2 } from "react-icons/rx";
+import { UseSelector, useSelector } from 'react-redux';
 
 
 const Navbar = () => {
+    let data = useSelector((state)=>state.single.cartItem)
     let [cartshow, setCartshow] = useState(false)
     let [cartacc, setCartacc] = useState(false)
     let [cartaddto, setCartaddto] = useState(false)
@@ -90,15 +92,17 @@ const Navbar = () => {
                         <FaCartPlus/>
                     </div>
                     {cartaddto && 
-                        <div className="absolute top-[50px] right-0 z-50">
-                        <div className="w-[300px] ">
+                        data.map((item)=>(
+                            <div className="absolute top-[50px] right-0 z-50">
+                               {console.log(item)}
+                        <div className="w-[300px]">
                             <div className="bg-[#F5F5F3] py-3 flex justify-between items-center px-3">
                                 <div className="">
-                                    <img src={Cartimg} alt="cart" />
+                                    <img className='h-[100px] w-[100px]' src={item.thumbnail} alt="cart" />
                                 </div>
                                 <div className="">
-                                    <h3 className='font-dm font-normal text-[16px]'>Black Smart Watch</h3>
-                                    <h5 className='font-dm font-normal text-[16px]'>$44.00</h5>
+                                    <h3 className='font-dm font-normal text-[16px]'>{item.title}</h3>
+                                    <h5 className='font-dm font-normal text-[16px]'>${item.price}</h5>
                                 </div>
                                 <div className="">
                                     <RxCross2/>
@@ -113,6 +117,8 @@ const Navbar = () => {
                             </div>
                         </div>
                     </div>
+                        ))
+                        
                     }
                     
                     </div>

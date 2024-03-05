@@ -27,8 +27,12 @@ const Header = () => {
                     <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>
                         <Link to="/product">Shop</Link>
                     </li>
-                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>About</li>
-                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>Contacts</li>
+                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>
+                        <Link to="/about">About</Link>
+                    </li>
+                    <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>
+                        <Link to="/contact">Contacts</Link>
+                    </li>
                     <li className='font-dm font-normal text-[16px] text-[#767676] hover:text-[#222] py-2'>Journal</li>
                 </ul>
             </div>

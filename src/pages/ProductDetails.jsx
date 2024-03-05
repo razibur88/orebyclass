@@ -5,6 +5,7 @@ import Container from '../components/Container';
 import Flex from '../components/Flex';
 import { IoIosStar,IoIosStarHalf } from "react-icons/io";
 import { useContext } from 'react';
+import { FaRegStar } from "react-icons/fa";
 import { Apidata } from '../components/ContextApi';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../components/slice/singleSlice';
@@ -13,7 +14,6 @@ const ProductDetails = () => {
     let dispatch = useDispatch()
     let [data, setData] = useState([])
     let productId = useParams()
-    let info = useContext(Apidata)
 
     let dataId = () =>{
         axios.get(`https://dummyjson.com/products/${productId.id}`).then((response)=>{
@@ -28,6 +28,15 @@ const ProductDetails = () => {
     let handleproduct = (item) =>{
         dispatch(addToCart({...item, qun:1}))
     }
+
+    let clientRating = Array.from({length: 5},(elm, index)=>{
+        let number = index + 0.5;
+        return(
+            data.rating >= index + 1 ? <IoIosStar/> : data.rating >= number ? <IoIosStarHalf /> : <FaRegStar /> 
+        ) 
+    })
+
+
 
   return (
     <>
@@ -48,11 +57,8 @@ const ProductDetails = () => {
             <h2 className='font-dm font-bold text-[40px]'>Product</h2>
            <div className="">
            <div className="flex">
-                <IoIosStar/>
-                <IoIosStar/>
-                <IoIosStar/>
-                <IoIosStar/>
-                <IoIosStarHalf />
+            {clientRating}
+                
             </div>
            
            </div>
