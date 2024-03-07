@@ -92,32 +92,33 @@ const Navbar = () => {
                         <FaCartPlus/>
                     </div>
                     {cartaddto && 
-                        data.map((item)=>(
                             <div className="absolute top-[50px] right-0 z-50">
-                               {console.log(item)}
-                        <div className="w-[300px]">
-                            <div className="bg-[#F5F5F3] py-3 flex justify-between items-center px-3">
-                                <div className="">
-                                    <img className='h-[100px] w-[100px]' src={item.thumbnail} alt="cart" />
+                                {data.map((item)=>(
+                                    <div className="w-[300px]">
+                                    <div className="bg-[#F5F5F3] py-3 flex justify-between items-center px-3">
+                                        <div className="">
+                                            <img className='h-[100px] w-[100px]' src={item.thumbnail} alt="cart" />
+                                        </div>
+                                        <div className="">
+                                            <h3 className='font-dm font-normal text-[16px]'>{item.title}</h3>
+                                            <h5 className='font-dm font-normal text-[16px]'>${item.price}</h5>
+                                        </div>
+                                        <div className="">
+                                            <RxCross2/>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white">
+                                    <h2 className='pt-4 font-dm font-normal text-[16px] pl-4'>Subtotal: $44.00</h2>
+                                    <div className="py-2 pl-2">
+                                        <a className='w-[140px] h-[50px] border-2 border-[#262626] inline-block leading-[50px] text-center font-dm font-normal text-[16px] hover:bg-[#262626] hover:text-white mr-3' href="#">View Cart</a>
+                                        <a className='w-[140px] h-[50px] border-2 border-[#262626] inline-block leading-[50px] text-center font-dm font-normal text-[16px] hover:bg-[#262626] hover:text-white' href="#">View Cart</a>
+                                    </div>
+                                    </div>
                                 </div>
-                                <div className="">
-                                    <h3 className='font-dm font-normal text-[16px]'>{item.title}</h3>
-                                    <h5 className='font-dm font-normal text-[16px]'>${item.price}</h5>
-                                </div>
-                                <div className="">
-                                    <RxCross2/>
-                                </div>
-                            </div>
-                            <div className="bg-white">
-                            <h2 className='pt-4 font-dm font-normal text-[16px] pl-4'>Subtotal: $44.00</h2>
-                            <div className="py-2 pl-2">
-                                <a className='w-[140px] h-[50px] border-2 border-[#262626] inline-block leading-[50px] text-center font-dm font-normal text-[16px] hover:bg-[#262626] hover:text-white mr-3' href="#">View Cart</a>
-                                <a className='w-[140px] h-[50px] border-2 border-[#262626] inline-block leading-[50px] text-center font-dm font-normal text-[16px] hover:bg-[#262626] hover:text-white' href="#">View Cart</a>
-                            </div>
-                            </div>
-                        </div>
+                                ))}
+                        
                     </div>
-                        ))
+                      
                         
                     }
                     

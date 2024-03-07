@@ -4,10 +4,21 @@ import { ImCross } from "react-icons/im";
 import { Link } from 'react-router-dom';
 import cart from "../assets/cart.png"
 import { FaPlus , FaMinus,FaCaretDown } from "react-icons/fa6";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { decrementProduct, incrementProduct, removeProduct } from '../components/slice/singleSlice';
 
 const Cart = () => {
   let data = useSelector((state) => state.single.cartItem)
+  let dispatch = useDispatch()
+
+
+const {totalPrice, totalQuantity} = data.reduce((acc, item)=>{
+  acc.totalPrice += item.price * item.qun
+  acc.totalQuantity += item.qun
+  return acc; 
+},{totalPrice:0,totalQuantity:0})
+
+
 
   return (
     <>
@@ -26,10 +37,10 @@ const Cart = () => {
         </div>
         
       </div>
-      {data.map((item)=>(
+      {data.map((item,index)=>(
         <div className="  bg-[#FFFFFF] flex items-center justify-around flex-wrap ">
         <div className="lg:w-[25%] sm:w-[23%] w-full flex justify-evenly items-center py-8  ">
-        <i><ImCross /></i>
+        <i onClick={()=>dispatch(removeProduct(index))}><ImCross /></i>
         <img className='h-[100px] w-[100px]' src={item.thumbnail} alt="cart" />
         <h6  className='font-dm font-bold text-[16px] leading-[23px] text-bl'>{item.title}</h6>
         </div>
@@ -38,19 +49,22 @@ const Cart = () => {
         </div>
         <div className="lg:w-[20%] sm:w-[23%] w-full lg:pr-[32px] xxs:pr-0 ">
         <div className="w-[142px] h-[36px] flex items-center justify-between gap-x-4 border-[1px]  ">
-            <i className='text-gr'><FaPlus /></i>
-            <h3 className='font-dm font-normal text-[16px] leading-[30px] text-gr'>1</h3>
-            <i className='text-gr'><FaMinus /></i>
+            <i onClick={()=>dispatch(incrementProduct(index))} className='text-gr'><FaPlus /></i>
+            <h3 className='font-dm font-normal text-[16px] leading-[30px] text-gr'>{item.qun}</h3>
+            <i onClick={()=>dispatch(decrementProduct(index))} className='text-gr'><FaMinus /></i>
         </div>
           </div>
         <div className="lg:w-[20%] sm:w-[18%] w-full lg:pl-[89px] xxs:pl-7">
-            <h5 className='font-dm font-bold text-[20px] leading-[26.04px] text-bl'>$44.00 </h5>
+            <h5 className='font-dm font-bold text-[20px] leading-[26.04px] text-bl'>${item.price * item.qun} </h5>
         </div>
 
     </div>
       ))}
-        
-        
+        <div className="text-end">
+        <h2 className='font-dm font-normal text-[16px] leading-[30px] text-gr'>Total Quantity: {totalQuantity}</h2>
+        <h2 className='font-dm font-normal text-[16px] leading-[30px] text-gr'>SubTotal: ${totalPrice}</h2>
+        <Link to="/checkout" className='w-[140px] h-[50px] border-2 border-[#262626] inline-block leading-[50px] text-center font-dm font-normal text-[16px] hover:bg-[#262626] hover:text-white'>Check out</Link>
+        </div>
         </Container>
     </div>
     </>
