@@ -1,24 +1,52 @@
 import React, { useState } from "react";
 import Container from "../components/Container";
 import { Link } from "react-router-dom";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, set, push } from "firebase/database";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   let [fullName, setFullName] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
+  let [err, setErr] = useState("");
+  const auth = getAuth();
+  let navigate = useNavigate();
+  const db = getDatabase();
   let handleFullname = (e) => {
     setFullName(e.target.value);
   };
   let handleEmail = (e) => {
     setEmail(e.target.value);
+    setErr("");
   };
   let handlepassword = (e) => {
     setPassword(e.target.value);
   };
 
   let handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("ami");
+    if (!email) {
+      setErr("ami faka");
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        set(ref(db, "users/" + user.user.uid), {
+          username: fullName,
+          email: email,
+        }).then(() => {
+          setEmail("");
+          setErr("");
+        });
+      })
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   };
   return (
     <Container>
@@ -93,6 +121,7 @@ const Signup = () => {
                 onChange={handleEmail}
               />{" "}
               <hr />
+              <p>{err}</p>
             </div>
             <div className="w-[45%] pb-12">
               <label
