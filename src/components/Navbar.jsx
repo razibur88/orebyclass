@@ -7,6 +7,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from 'react-redux';
 import { Apidata } from './ContextApi';
+import { Link } from 'react-router-dom';
 
 
 const Navbar = () => {
@@ -115,8 +116,8 @@ const Navbar = () => {
                             {cartacc &&
                                 <div className="bg-[#262626] w-[200px] absolute top-[50px] right-0 z-50">
                                     <ul>
-                                        <li className='text-[rgba(255,255,255,0.71)] py-3 pl-3 hover:text-white hover:pl-6 duration-300 ease-in'><a href="#">My Account</a></li>
-                                        <li className='text-[rgba(255,255,255,0.71)] py-3 pl-3 hover:text-white hover:pl-6 duration-300 ease-in'><a href="#">Login</a></li>
+                                        <li className='text-[rgba(255,255,255,0.71)] py-3 pl-3 hover:text-white hover:pl-6 duration-300 ease-in'><Link to="/account">My Account</Link></li>
+                                        <li className='text-[rgba(255,255,255,0.71)] py-3 pl-3 hover:text-white hover:pl-6 duration-300 ease-in'><Link to="/login">Login</Link></li>
                                     </ul>
                                 </div>
                             }
@@ -143,8 +144,8 @@ const Navbar = () => {
                                             <div className="bg-white">
                                                 <h2 className='pt-4 font-dm font-normal text-[16px] pl-4'>Subtotal: $44.00</h2>
                                                 <div className="py-2 pl-2">
-                                                    <a className='w-[140px] h-[50px] border-2 border-[#262626] inline-block leading-[50px] text-center font-dm font-normal text-[16px] hover:bg-[#262626] hover:text-white mr-3' href="#">View Cart</a>
-                                                    <a className='w-[140px] h-[50px] border-2 border-[#262626] inline-block leading-[50px] text-center font-dm font-normal text-[16px] hover:bg-[#262626] hover:text-white' href="#">View Cart</a>
+                                                    <a className='w-[140px] h-[50px] border-2 border-[#262626] inline-block leading-[50px] text-center font-dm font-normal text-[16px] hover:bg-[#262626] hover:text-white mr-3'><Link to="/cart">View Cart</Link></a>
+                                                    <a className='w-[140px] h-[50px] border-2 border-[#262626] inline-block leading-[50px] text-center font-dm font-normal text-[16px] hover:bg-[#262626] hover:text-white'><Link to="/checkout">Checkout</Link></a>
                                                 </div>
                                             </div>
                                         </div>
