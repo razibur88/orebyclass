@@ -16,6 +16,7 @@ import Checkout from "./pages/Checkout";
 import Myaccount from "./pages/Myaccount";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
+import SearchFilterPage from "./pages/SearchFilterPage";
 let router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
@@ -28,6 +29,7 @@ let router = createBrowserRouter(
       <Route path="/checkout" element={<Checkout />}></Route>
       <Route path="/account" element={<Myaccount />}></Route>
       <Route path="/sign" element={<Signup />}></Route>
+      <Route path="/search" element={<SearchFilterPage/>}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="*" element={<Error />}></Route>
     </Route>

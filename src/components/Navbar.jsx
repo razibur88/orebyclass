@@ -7,36 +7,34 @@ import { IoSearchSharp } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from 'react-redux';
 import { Apidata } from './ContextApi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
+    let navigate = useNavigate()
     let info = useContext(Apidata)
     let data = useSelector((state) => state.single.cartItem)
     let [cartshow, setCartshow] = useState(false)
     let [cartacc, setCartacc] = useState(false)
+    let [searchFilterfaka, setSearchFilterFaka] = useState("")
     let [searchFilter, setSearchFilter] = useState([])
     let [cartaddto, setCartaddto] = useState(false)
     let categoryRef = useRef()
     let cartaccRef = useRef()
     let cartaddRef = useRef()
-
-
-
-
     useEffect(() => {
         document.addEventListener("click", (e) => {
-            if (categoryRef.current.contains(e.target) == true) {
+            if (categoryRef?.current?.contains(e.target) == true) {
                 setCartshow(!cartshow)
             } else {
                 setCartshow(false)
             }
-            if (cartaccRef.current.contains(e.target) == true) {
+            if (cartaccRef?.current?.contains(e.target) == true) {
                 setCartacc(!cartacc)
             } else {
                 setCartacc(false)
             }
-            if (cartaddRef.current.contains(e.target) == true) {
+            if (cartaddRef?.current?.contains(e.target) == true) {
                 setCartaddto(!cartaddto)
             } else {
                 setCartaddto(false)
@@ -44,7 +42,9 @@ const Navbar = () => {
         })
     }, [cartshow, cartacc, cartaddto])
 
+
     let handleSearch = (e) => {
+        setSearchFilterFaka(e.target.value)
         if (e.target.value == "") {
             setSearchFilter([])
         } else {
@@ -53,6 +53,22 @@ const Navbar = () => {
         }
 
     }
+
+    let handleSearchFilter = () =>{
+        navigate("/search",{ state: { searchFilter: searchFilter } })
+        setSearchFilter("")
+        setSearchFilterFaka("")
+        
+    }
+    let handleKeySetUp = (e)=>{
+        if(e.key == "Enter"){
+            navigate("/search",{ state: { searchFilter: searchFilter } })
+            setSearchFilter("")
+            setSearchFilterFaka("")
+        }
+
+    }
+
     return (
         <nav className='py-4 bg-[#F5F5F3]'>
             <Container>
@@ -78,12 +94,14 @@ const Navbar = () => {
                     </div>
                     <div className="w-full lg:w-1/2">
                         <div className="relative">
-                            <input onChange={handleSearch} type="search" placeholder='search...' className='w-full border-2 border-[#222] outline-0 py-3 px-2' />
-                            <div className="absolute top-[50%] right-[15px] translate-y-[-50%] ">
-                                <IoSearchSharp className='text-[20px]' />
+                            <input onChange={handleSearch} onKeyUp={handleKeySetUp} type="search" placeholder='search...' className='w-full border-2 border-[#222] outline-0 py-3 px-2' value={searchFilterfaka} />
+                            <div className="absolute top-[50%] right-[15px] translate-y-[-50%]" >
+                              <div className="cursor-pointer">
+                              <IoSearchSharp onClick={handleSearchFilter} className='text-[20px]' />
+                              </div>
                             </div>
                             {searchFilter.length > 0 &&
-                                <div className="absolute h-[300px] bg-[gray] overflow-y-scroll top-[50px] left-0 z-50">
+                                <div className="absolute h-[300px] overflow-y-scroll top-[50px] left-0 z-50">
                                     {searchFilter.map((item) => (
                                         <div className="w-[300px]">
                                             <div className="bg-[#F5F5F3] py-3 flex justify-between items-center px-3">
@@ -100,11 +118,6 @@ const Navbar = () => {
                                     ))}
                                 </div>
                             }
-
-
-
-
-
                         </div>
                     </div>
                     <div className="w-full lg:w-1/4">
@@ -122,8 +135,10 @@ const Navbar = () => {
                                 </div>
                             }
 
-                            <div className="cursor-pointer" ref={cartaddRef}>
+                            <div className="cursor-pointer relative" ref={cartaddRef}>
                                 <FaCartPlus />
+                                {data.length ? <div className="absolute top-[-10px] right-[-15px] text-center h-5 w-5 bg-yellow-600 rounded-full">
+                              {data.length} </div> : "" }
                             </div>
                             {cartaddto &&
                                 <div className="absolute top-[50px] right-0 z-50">
